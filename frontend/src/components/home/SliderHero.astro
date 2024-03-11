@@ -1,0 +1,80 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import http from '@/services/api'
+
+const { lang } = Astro.params
+const getlang = getLangFromUrl(Astro.url)
+const t = useTranslations(getlang)
+
+const slides = await http(`home/slider-hero?lang=${lang}`)
+---
+
+<section class="slider">
+  <!-- Swiper -->
+  <div class="swiper slider-hero">
+    <div class="swiper-wrapper">
+      <!-- star repeat slider -->
+      {
+        slides?.map((slide, index) => {
+          return (
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slider-image">
+                  <img
+                    src={slide?.image?.url}
+                    srcset={slide?.image?.srcset}
+                    alt={slide.title}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    width="1920"
+                    height="1080"
+                  />
+                </div>
+                <div class="container xlarge">
+                  <div class="row justify-start">
+                    <div class="col col-mobile-12 col-desktop-6">
+                      <h4 class="text-white text-mobile-large mb-2 bullet-decoration">
+                        {slide?.subtitle}
+                      </h4>
+                      <h2 class="text-white text-mobile-4xl text-desktop-5xl text-bold">
+                        {slide?.title}
+                      </h2>
+                      <p class="text-white text-mobile-sm text-desktop-xl line-decoration">
+                        {slide?.texto}
+                      </p>
+                      <a class="button" href={slide?.link_button}>
+                        {t('button.learn')}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })
+      }
+      <!-- end repeat -->
+    </div>
+    <div class="swiper-button-next slider-hero-next">
+      <img src="/images/icons/arrow-left.svg" alt="slider next" />
+    </div>
+    <div class="swiper-button-prev slider-hero-prev">
+      <img src="/images/icons/arrow-right.svg" alt="Sldier prev" />
+    </div>
+    <div class="swiper-pagination slider-hero-pagination"></div>
+  </div>
+  <!-- Swiper JS -->
+</section>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.slider-hero', {
+    navigation: {
+      nextEl: '.slider-hero-next',
+      prevEl: '.slider-hero-prev'
+    },
+    pagination: {
+      el: '.slider-hero-pagination',
+      clickable: true
+    }
+  })
+</script>

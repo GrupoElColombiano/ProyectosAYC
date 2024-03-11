@@ -1,0 +1,84 @@
+---
+import http from '@/services/api'
+import ArticleCard from '@/components/global/ArticleCard.astro'
+
+const { lang } = Astro.params
+const sectionData = await http(`home/last-posts?lang=${lang}`)
+const articleList = await http(`articles?lang=${lang}&limit=10`)
+---
+
+<section class="section recent-projects">
+  <div class="container xlarge">
+    <div class="row align-middle">
+      <div class="col col-mobile-12 col-desktop-4 order-mobile-last order-desktop-first">
+        <div class="mt-mobile-6 mt-desktop-0">
+          <h4 class="text-mobile-large mb-2 bullet-decoration">{sectionData?.subtitle}</h4>
+          <h2 class="text-mobile-3xl text-desktop-4xl text-bold">
+            {sectionData?.title}
+          </h2>
+          <p class="text-mobile-sm text-desktop-xl line-decoration" set:html={sectionData?.text} />
+        </div>
+      </div>
+
+      <div class="col col-mobile-12 col-desktop-8">
+        <!-- Swiper -->
+        <div class="recent-projects-container">
+          <div class="swiper recent-slider">
+            <div class="swiper-wrapper">
+              <!-- star repeat slider -->
+              {
+                articleList?.map((article) => (
+                  <div class="swiper-slide">
+                    <ArticleCard
+                      image={article?.image?.url}
+                      image_srcset={article?.image?.srcset}
+                      subtitle={article?.categories[0]}
+                      title={article?.title}
+                      href={`/${lang}/articulos/${article?.slug}`}
+                    />
+                  </div>
+                ))
+              }
+              <!-- end repeat -->
+            </div>
+
+            <div class="swiper-button-prev recent-slider-prev">
+              <img src="/images/icons/arrow-min-black-left.svg" alt="Slider prev" />
+            </div>
+            <div class="swiper-button-next recent-slider-next">
+              <img src="/images/icons/arrow-min-black-right.svg" alt="Slider Next" />
+            </div>
+          </div>
+          <div class="swiper-pagination recent-slider-pagination"></div>
+        </div>
+        <!-- Swiper JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.recent-slider', {
+    slidesPerView: 2.8,
+    spaceBetween: 30,
+    navigation: {
+      nextEl: '.recent-slider-next',
+      prevEl: '.recent-slider-prev'
+    },
+    pagination: {
+      el: '.recent-slider-pagination',
+      clickable: true
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 2.8,
+        spaceBetween: 30
+      },
+      320: {
+        slidesPerView: 1.2,
+        spaceBetween: 10
+      }
+    }
+  })
+</script>

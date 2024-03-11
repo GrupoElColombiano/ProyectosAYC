@@ -1,0 +1,51 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Topbar from '@/components/layout/Topbar.astro'
+import PropertyCardCarousel from '@/components/global/PropertyCardCarousel.astro'
+import http from '@/services/api'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const getLang = getLangFromUrl(Astro.url)
+const t = useTranslations(getLang)
+const { lang, location } = Astro.params
+const properties = (await http(`properties/categories?slug=${location}&lang=${lang}`)) || []
+
+if (properties.length === 0) {
+  return Astro.redirect(`/${lang}/404`)
+}
+
+const seoInfo = {
+  title: properties?.localizacion,
+  description: `El compromiso de locales y extranjeros con la región ha impulsado su desarrollo económico, con especial en el sector inmobiliario.`
+}
+---
+
+<Layout seoInfo={seoInfo}>
+  <Topbar title={`Inicio > Zonas proyectos > ${properties?.localizacion}`} />
+  <div class="section">
+    <div class="container xlarge">
+      <h2 class="text-mobile-2xl text-desktop-3xl text-semibold bullet-decoration mb-5">
+        {properties?.localizacion}
+      </h2>
+      <div class="row mb-6">
+        {
+          properties?.propiedades?.map((property) => (
+            <div class="col col-mobile-12 col-desktop-4">
+              <PropertyCardCarousel
+                name={property?.title}
+                images={property?.galeria}
+                price={property?.informacion_general?.precio}
+                area={property?.informacion_general?.areas_disponibles}
+                rooms={property?.informacion_general?.n_habitaciones}
+                bathrooms={property?.informacion_general?.n_banos}
+                location={property?.informacion_general?.zona}
+                link={`/${lang}/proyectos/${properties.slug}/${property.slug}`}
+              />
+            </div>
+          ))
+        }
+      </div>
+      <!-- <a href="#" class="button mx-auto mt-6">{t('button.loadMore')}</a> -->
+    </div>
+  </div>
+</Layout>

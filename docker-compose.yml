@@ -1,0 +1,82 @@
+version: '3.9'
+services:
+  # db:
+  #   container_name: properties-db
+  #   image: mariadb:latest
+  #   platform: linux/amd64
+  #   restart: always
+  #   environment:
+  #     MYSQL_TCP_PORT: 3306
+  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  #     MYSQL_DATABASE: ${MYSQL_DATABASE}
+  #     MYSQL_USER: ${MYSQL_USER}
+  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  #   ports:
+  #     - 3306:3306
+  #   volumes:
+  #     - ./mariadb/data:/var/lib/mysql
+  #   networks:
+  #     prop-network:
+  #       aliases:
+  #         - ${MYSQL_HOST}
+
+  # wordpress:
+  #   container_name: properties-wp
+  #   depends_on:
+  #     - db
+  #   image: wordpress:latest
+  #   restart: always
+  #   ports:
+  #     - 3000:80
+  #   environment:
+  #     WORDPRESS_DB_HOST: ${MYSQL_HOST}
+  #     WORDPRESS_DB_USER: ${MYSQL_USER}
+  #     WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+  #     WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+  #   volumes:
+  #     - ./backend/wp-content/themes:/var/www/html/wp-content/themes
+  #     - ./backend/wp-content/plugins:/var/www/html/wp-content/plugins
+  #     - ./backend/wp-content/uploads:/var/www/html/wp-content/uploads
+  #   networks:
+  #     prop-network:
+  #       aliases:
+  #         - wp_host
+
+  # phpmyadmin:
+  #   image: phpmyadmin:latest
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - 8888:80
+  #   environment:
+  #     # PMA_HOST: db
+  #     PMA_ARBITRARY: 1
+  #     PMA_DB_ENGINE: mariadb
+  #     # PMA_PORT: 3306
+  #     MYSQL_HOST: ${MYSQL_HOST}
+  #     # MYSQL_USER: ${MYSQL_USER}
+  #     # MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  #   networks:
+  #     prop-network:
+  #       aliases:
+  #         - phpmyadmin_host
+    
+  front:
+   container_name: properties-front
+   restart: always
+   build: ./frontend
+   ports:
+     - 80:3000
+   networks:
+     prop-network:
+       aliases:
+         - prop_host
+
+networks:
+  prop-network:
+    name: properties-net
+    driver: bridge
+    ipam:
+      driver: default

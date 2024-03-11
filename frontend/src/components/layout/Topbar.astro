@@ -1,0 +1,13 @@
+---
+export interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<section class="top-bar p-6">
+  <div class="container xlarge">
+    <h4 class="text-desktop-xl text-semibold">{title}</h4>
+  </div>
+</section>

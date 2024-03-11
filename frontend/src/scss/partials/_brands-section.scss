@@ -1,0 +1,66 @@
+.brands-section {
+  padding: 4rem !important;
+  background: $primary-color;
+  user-select: none;
+
+  @media (max-width: 1024px) {
+    padding: 3rem 0 !important;
+  }
+
+  &-container {
+    position: relative;
+  }
+}
+
+.brands-carousel {
+  @media (max-width: 1024px) {
+    width: 86%;
+  }
+
+  &-next,
+  &-prev {
+    width: 50px !important;
+    img {
+      width: 50px;
+    }
+  }
+
+  &-next {
+    right: -60px !important;
+
+    @media (max-width: 1024px) {
+      right: -10px !important;
+    }
+  }
+
+  &-prev {
+    left: -60px !important;
+
+    @media (max-width: 1024px) {
+      left: -10px !important;
+    }
+  }
+
+  &-item {
+    background-color: #fff;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+
+    @media (max-width: 1024px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    img {
+      width: 80%;
+      margin: 0 auto;
+      display: table;
+    }
+  }
+}

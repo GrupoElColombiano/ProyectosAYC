@@ -1,0 +1,71 @@
+.video-section {
+  padding: 4rem !important;
+  background: $primary-color;
+
+  @media (max-width: 1024px) {
+    padding: 3rem 1rem !important;
+  }
+
+  &-box {
+    background: #fff;
+    padding: 2rem;
+    max-width: 300px;
+    transform: translateX(-100px);
+    z-index: 9;
+    position: relative;
+
+    @media (max-width: 1024px) {
+      max-width: 100%;
+      transform: translateX(0);
+    }
+  }
+
+  &-container {
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+  }
+
+  &-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 9;
+    transition: all 0.3s ease-in-out;
+    animation: pulse 2s infinite;
+    border-radius: 50%;
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+}
+
+.modal-video {
+  iframe {
+    display: block; /* iframes are inline by default */
+    height: 60vh; /* Set height to 100% of the viewport height */
+    width: 100%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}

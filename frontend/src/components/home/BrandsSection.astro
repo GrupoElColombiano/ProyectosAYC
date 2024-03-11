@@ -1,0 +1,72 @@
+---
+import api from '@/services/api'
+
+const { lang } = Astro.params
+const data = await api(`home/brands?lang=${lang}`)
+---
+
+<section class="section brands-section">
+  <div class="container xlarge">
+    <h3
+      class="text-mobile-2xl text-desktop-4xl text-bold mb-5 text-white text-mobile-center text-desktop-left"
+    >
+      {data?.brands?.title}
+    </h3>
+
+    <!-- Swiper -->
+    <div class="brands-section-container">
+      <div class="swiper brands-carousel">
+        <div class="swiper-wrapper">
+          <!-- star repeat slider -->
+          {
+            data?.brands?.brands_carousel?.map((item) => (
+              <div class="swiper-slide">
+                <div class="brands-carousel-item">
+                  <a href={item?.brand_link} target="_blank">
+                    <img
+                      loading="lazy"
+                      src={item?.brand_logo?.url}
+                      alt={item?.brand_logo?.title}
+                      width="120"
+                      height="120"
+                    />
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+          <!-- end repeat -->
+        </div>
+      </div>
+      <div class="swiper-button-next brands-carousel-next">
+        <img src="/images/icons/arrow-right-black.svg" alt="Carousel next" />
+      </div>
+      <div class="swiper-button-prev brands-carousel-prev">
+        <img src="/images/icons/arrow-left-black.svg" alt="Carousel back" />
+      </div>
+    </div>
+    <!-- Swiper JS -->
+  </div>
+</section>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.brands-carousel', {
+    slidesPerView: 5.5,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: '.brands-carousel-next',
+      prevEl: '.brands-carousel-prev'
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 2.5,
+        spaceBetween: 10
+      },
+      1024: {
+        slidesPerView: 5.5,
+        spaceBetween: 10
+      }
+    }
+  })
+</script>

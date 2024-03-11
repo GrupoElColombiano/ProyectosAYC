@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <rect id="Artboard1" x="0" y="0" width="42" height="42" style="fill:none;"/>
+    <g id="Group-340" serif:id="Group 340">
+        <g>
+            <circle id="Ellipse-42" serif:id="Ellipse 42" cx="21" cy="21" r="20.257" style="fill-opacity:0.35;"/>
+            <g id="ð----icon--chevron-left-" serif:id="ð¦ icon &quot;chevron-left&quot;">
+                <path id="Vector" d="M12.696,20.254l9.306,-8.542c0.449,-0.412 1.177,-0.412 1.625,-0l1.086,0.996c0.448,0.411 0.448,1.078 0.002,1.49l-7.376,6.802l7.375,6.802c0.447,0.412 0.446,1.079 -0.002,1.49l-1.085,0.996c-0.449,0.412 -1.177,0.412 -1.625,0l-9.306,-8.542c-0.448,-0.412 -0.448,-1.08 0,-1.492Z" style="fill:#fff;fill-rule:nonzero;"/>
+            </g>
+        </g>
+    </g>
+</svg>

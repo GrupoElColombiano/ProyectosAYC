@@ -1,0 +1,126 @@
+---
+export interface Props {
+  images: Array<any>;
+  name: string;
+  price: string;
+  location: string;
+  rooms: string;
+  bathrooms: string;
+  area: string;
+  link: string;
+}
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { name, images, price, location, rooms, bathrooms, area, link } =
+  Astro.props;
+---
+
+<div class="property-carousel">
+  <div class="property-carousel-container">
+    <div class="swiper proyect-slider">
+      <div class="swiper-wrapper">
+        {
+          images?.map((image) => {
+            return (
+              <div class="swiper-slide">
+                <a href={link}>
+                  <div class="property-carousel-image">
+                    <img
+                      loading="lazy"
+                      src={image.url}
+                      srcset={image.srcset}
+                      alt="Slider Image"
+                    />
+                  </div>
+                </a>
+              </div>
+            );
+          })
+        }
+      </div>
+      <div class="swiper-button-next proyect-slider-next">
+        <img src="/images/icons/arrow-min-white-right.svg" alt="Slider Next" />
+      </div>
+      <div class="swiper-button-prev proyect-slider-prev">
+        <img src="/images/icons/arrow-min-white-left.svg" alt="Slider Prev" />
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="property-carousel-content">
+      <a href={link}>
+        <h3 class="property-carousel-subtitle mb-2 text-xl"><b>{name}</b></h3>
+      </a>
+      <h3 class="property-carousel-subtitle mb-2">
+        {t("project.price")}
+        <b>{price}</b>
+      </h3>
+      <div class="row line-decoration">
+        <div class="col col-12 mb-1">
+          <img
+            src="/images/icons/location.svg"
+            width="16"
+            height="16"
+            alt="Icon location"
+          />
+          {location}
+        </div>
+        <div class="col col-narrow">
+          <img
+            src="/images/icons/area.svg"
+            width="16"
+            height="16"
+            alt="Icon area"
+          />
+          {area}
+        </div>
+        <div class="col col-narrow">
+          <img
+            src="/images/icons/room.svg"
+            width="16"
+            height="16"
+            alt="Icon Room"
+          />
+          {rooms}
+        </div>
+        <div class="col col-narrow">
+          <img
+            src="/images/icons/bat.svg"
+            width="16"
+            height="16"
+            alt="Icon Room"
+          />
+          {bathrooms}
+        </div>
+      </div>
+      <a href={link} class="property-carousel-link">
+        {t("button.learn")}
+        <img src="/images/icons/link-arrow-blue.svg" alt="Link arrow" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Initialize Swiper -->
+
+<style>
+  .property-carousel-content a {
+    color: #133a60;
+  }
+</style>
+
+<script>
+  var swiper = new Swiper(".proyect-slider", {
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>

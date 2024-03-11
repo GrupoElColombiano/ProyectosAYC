@@ -1,0 +1,44 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import http from '@/services/api'
+import PropertyCategoryCarousel from '@/components/global/PropertyCategoryCarousel.astro'
+
+const getLang = getLangFromUrl(Astro.url)
+const t = useTranslations(getLang)
+const { lang } = Astro.params
+const properties = await http(
+  `properties/categories?properties_limit=5&location_limit=20&lang=${lang}`
+)
+---
+
+<section class="section proyects-section">
+  <div class="container xlarge">
+    <h3 class="text-4xl text-bold mb-6">{t('project.title')}</h3>
+
+    <div class="tabs">
+      <div class="tabs-navcontainer">
+        <ul id="tabsNav" class="tabs-nav">
+          {
+            properties?.map((category, index) => (
+              <li class:list={['tabs-nav-item', { active: index === 0 }]} data-tab={category.slug}>
+                {category.localizacion}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div id="tabsContent">
+        {
+          properties?.map((category, index) => (
+            <div class:list={['tabs-content', { active: index === 0 }]} data-tab={category.slug}>
+              <PropertyCategoryCarousel category={category} />
+            </div>
+          ))
+        }
+      </div>
+
+      <a href={`/${lang}/proyectos/`} class="button mx-auto mt-6">{t('button.learn')}</a>
+    </div>
+  </div>
+</section>

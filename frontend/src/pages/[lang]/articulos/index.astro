@@ -1,0 +1,38 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Topbar from '@/components/layout/Topbar.astro'
+import http from '@/services/api'
+import ArticleCard from '@/components/global/ArticleCard.astro'
+
+const { lang } = Astro.params
+
+const articles = await http(`articles?lang=${lang}`)
+
+const seoInfo = {
+  title: 'Articulos'
+}
+---
+
+<Layout seoInfo={seoInfo}>
+  <Topbar title="Inicio > Articulos" />
+
+  <div class="section">
+    <div class="container xlarge">
+      <div class="row mb-6">
+        {
+          articles?.map((article) => (
+            <div class="col col-mobile-12 col-desktop-4 mb-4">
+              <ArticleCard
+                image={article?.image?.url}
+                image_srcset={article?.image?.srcset}
+                subtitle={article?.categories[0]}
+                title={article?.title}
+                href={`/${lang}/articulos/${article?.slug}`}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,34 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ProyectsSection from '@/components/home/ProyectsSection.astro'
+
+const seoInfo = {
+  title: 'Email enviado'
+}
+---
+
+<Layout seoInfo={seoInfo}>
+  <div class="section">
+    <div class="container xlarge">
+      <div class="row align-middle mb-4">
+        <div class="col col-mobile-12 col-desktop-2 text-mobile-center text-desktop-left">
+          <img src="/images/image-sucess-1.jpg" alt="" />
+        </div>
+        <div class="col col-mobile-12 col-desktop-8 p-6">
+          <h4 class="text-mobile-3xl text-desktop-4xl text-semibold">
+            Hemos recibido tu solicitud de contacto
+          </h4>
+          <p class="text-mobile-lg text-desktop-xl">
+            Gracias, recibimos correctamente tus datos y pronto un asesor de la constructora se
+            pondrá en contacto contigo para darte todos los detalles de ese proyecto que tanto
+            deseas. Continua explorando, hay más proyectos esperando conocerte.
+          </p>
+        </div>
+        <div class="col col-mobile-12 col-desktop-2">
+          <img src="/images/image-sucess.jpg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <ProyectsSection />
+</Layout>

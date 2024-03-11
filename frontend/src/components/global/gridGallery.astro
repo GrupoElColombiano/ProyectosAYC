@@ -1,0 +1,60 @@
+---
+export interface Props {
+  images: any[]
+}
+
+const { images } = Astro.props
+---
+
+<div class="grid-gallery">
+  {
+    images?.slice(0, 5)?.map((image, index) => {
+      if (index === 4) {
+        return (
+          <div class="grid-gallery-item" data-modal="gallery">
+            <div class="grid-gallery-overlay">
+              <div class="grid-gallery-overlayText">
+                <div class="text-bold text-3xl mb-4 text-center">{images.length - 5}+</div>
+                <div class="text-xl text-bold mb-1">Ver todas las fotos</div>
+                <div class="grid-gallery-overlaylink">
+                  ver más <img src="/images/icons/link-arrow.svg" alt="Image galerry" width="10" />
+                </div>
+              </div>
+            </div>
+            <img src={image?.url} srcset={image?.srcset} class="grid-gallery-img" />
+          </div>
+        )
+      }
+      return (
+        <div class="grid-gallery-item" data-modal="gallery">
+          <img
+            src={image?.url}
+            srcset={image?.srcset}
+            alt="Image galerry"
+            class="grid-gallery-img"
+          />
+        </div>
+      )
+    })
+  }
+</div>
+
+<!-- modal slider -->
+
+<div id="gallery" class="modal">
+  <div class="modal-close" data-close="gallery">
+    <img src="/images/icons/close.svg" alt="Image Gallery" width="20" />
+  </div>
+  <div class="modal-overlay" data-close="gallery"></div>
+  <div class="modal-content modal-content-image">
+    {
+      images?.map((image) => {
+        return (
+          <div class="modal-content-item">
+            <img src={image?.url} srcset={image?.srcset} alt="Image Gallery" class="grid-modal-image" />
+          </div>
+        )
+      })
+    }
+  </div>
+</div>

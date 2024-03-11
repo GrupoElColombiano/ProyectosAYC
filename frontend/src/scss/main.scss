@@ -1,0 +1,36 @@
+// Import variables
+@import 'vars';
+
+// Import reset normalize
+@import 'normalize';
+
+// Import global
+@import 'global';
+
+// Import layout
+@import 'layout/header';
+@import 'layout/footer';
+
+// import components
+
+// @import 'partials/button';
+@import 'partials/slider-hero';
+@import 'partials/article-card';
+@import 'partials/property-carousel';
+@import 'partials/tabs';
+@import 'partials/grid-gallery';
+
+// index section
+
+@import 'partials/video-section';
+@import 'partials/brands-section';
+@import 'partials/recent-projects';
+@import 'partials/proyects-section';
+@import 'partials/epaper';
+
+// proyects section
+
+@import 'partials/box';
+@import 'partials/accordion';
+@import 'partials/shared';
+@import 'partials/modal';

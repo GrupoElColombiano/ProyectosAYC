@@ -1,0 +1,31 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ProyectsSection from '@/components/home/ProyectsSection.astro'
+
+const seoInfo = {
+  title: 'Error 404'
+}
+---
+
+<Layout seoInfo={seoInfo}>
+  <div class="section">
+    <div class="container large">
+      <div class="row align-middle mb-4">
+        <div class="col col-mobile-12 col-desktop-1 text-mobile-center text-desktop-left">
+          <img src="/images/icons/error.svg" alt="" />
+        </div>
+        <div class="col col-mobile-12 col-desktop-11 p-6">
+          <h4 class="text-mobile-3xl text-desktop-4xl text-semibold">
+            ¡Ups! Parece que has llegado a una página inexistente.
+          </h4>
+          <p class="text-mobile-lg text-desktop-xl">
+            Nos esforzamos por brindarte la mejor experiencia. Lamentablemente, la página que estás
+            buscando no se encuentra disponible en este momento. Pero no te preocupes, estamos aquí
+            para ayudarte a encontrar lo que necesitas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ProyectsSection />
+</Layout>

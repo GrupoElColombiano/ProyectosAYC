@@ -1,0 +1,150 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Bold.woff2') format('woff2'),
+    url('/fonts/OpenSans-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Medium.woff2') format('woff2'),
+    url('/fonts/OpenSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular.woff2') format('woff2'),
+    url('/fonts/OpenSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  // height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: $primary-color;
+  padding-top: 80px;
+}
+
+.preloader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 9999999999;
+  background: #ffffff;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 150px;
+  }
+}
+
+// Text color clasess
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secundary {
+  color: $secundary-color;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-color {
+  color: $text-color;
+}
+
+// Buttons
+.button {
+  border: none;
+  font-size: 1rem;
+  background-color: $secundary-color;
+  padding: 10px 30px;
+  color: #fff;
+  display: table;
+  text-align: left;
+  transition: all 0.3s !important;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+// reset wisper slider
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: none !important;
+}
+
+// decorations
+
+.bullet-decoration {
+  position: relative;
+  padding-left: 1.3em;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    background: $secundary-color;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    transform: scale(0.6);
+  }
+}
+
+.line-decoration {
+  position: relative;
+  padding: 0.2em 0 0.2em 1em;
+  border-left: 1px solid $secundary-color;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 90% !important;
+  }
+}
+
+.hidden-desktop {
+  @media (min-width: 1025px) {
+    display: none !important;
+  }
+}
+
+.hidden-mobile {
+  @media (max-width: 1024px) {
+    display: none !important;
+  }
+}
+
+.article-content {
+  a {
+    color: $primary-color;
+    text-decoration: underline;
+  }
+}

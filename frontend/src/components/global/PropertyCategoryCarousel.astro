@@ -1,0 +1,64 @@
+---
+export interface Props {
+  category: any
+}
+
+import PropertyCardCarousel from '@/components/global/PropertyCardCarousel.astro'
+
+const { lang } = Astro.params
+const { category } = Astro.props
+---
+
+<div class="proyects-section-container">
+  <div class="swiper proyects-carousel">
+    <div class="swiper-wrapper">
+      <!-- star repeat slider -->
+      {
+        category?.propiedades?.map((property) => (
+          <div class="swiper-slide">
+            <PropertyCardCarousel
+              name={property?.title}
+              images={property?.galeria}
+              price={property?.informacion_general?.precio}
+              area={property?.informacion_general?.areas_disponibles}
+              rooms={property?.informacion_general?.n_habitaciones}
+              bathrooms={property?.informacion_general?.n_banos}
+              location={property?.informacion_general?.zona}
+              link={`/${lang}/proyectos/${category.slug}/${property.slug}`}
+            />
+          </div>
+        ))
+      }
+      <!-- end repeat -->
+    </div>
+  </div>
+  <div class="swiper-button-next proyects-carousel-next">
+    <img src="/images/icons/arrow-right-black.svg" alt="Carousel next" />
+  </div>
+  <div class="swiper-button-prev proyects-carousel-prev">
+    <img src="/images/icons/arrow-left-black.svg" alt="Carousel prev" />
+  </div>
+</div>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.proyects-carousel', {
+    slidesPerView: 3.5,
+    spaceBetween: 30,
+    simulateTouch: false,
+    navigation: {
+      nextEl: '.proyects-carousel-next',
+      prevEl: '.proyects-carousel-prev'
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 3.5,
+        spaceBetween: 30
+      },
+      320: {
+        slidesPerView: 1.2,
+        spaceBetween: 10
+      }
+    }
+  })
+</script>

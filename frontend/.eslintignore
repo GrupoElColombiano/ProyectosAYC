@@ -1,0 +1,6 @@
+.turbo
+.nuxt
+.nitro
+.cache
+.output
+dist

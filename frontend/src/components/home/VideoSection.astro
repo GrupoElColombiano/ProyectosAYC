@@ -1,0 +1,68 @@
+---
+import http from '@/services/api'
+
+const { lang } = Astro.params
+const video = await http(`home/video-section?lang=${lang}`)
+---
+
+<section id="multimedia" class="section video-section">
+  <div class="container xlarge">
+    <div class="row align-middle">
+      <div class="col col-mobile-12 col-desktop-8">
+        <div class="video-section-container" onclick="playVideosInIframe(event)">
+          <div class="video-section-play" data-modal="video">
+            <img src="/images/icons/play.svg" alt="Play video" />
+          </div>
+          <img
+            src={video?.image?.url}
+            srcset={video?.image?.url}
+            alt={video?.title}
+            width="755"
+            height="503"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="video-section-box">
+          <div class="mb-2 bullet-decoration">{video?.subtitle}</div>
+          <h4 class="text-mobile-2xl text-desktop-4xl text-bold">
+            {video?.title}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- modal video -->
+<div id="video" class="modal">
+  <div class="modal-close" data-close="video" onclick="removePlayer()">
+    <img src="/images/icons/close.svg" alt="Modal video close" width="20" />
+  </div>
+  <div class="modal-overlay" data-close="video"></div>
+  <div class="modal-content">
+    <div class="modal-video">
+      <div id="iframeVideo" data-iframe={video?.link_video}></div>
+      <div class="tvPlayer"></div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function playVideosInIframe(evt) {
+    evt.preventDefault()
+    const lnkData = evt.target.parentElement.dataset
+    const playerContaniner = document.querySelector('#iframeVideo')
+    const player = document.querySelector('.tvPlayer')
+    player.innerHTML = playerContaniner.dataset.iframe
+    playerContaniner.style.display = 'flex'
+  }
+
+  function removePlayer() {
+    const playerContaniner = document.querySelector('.playerContanier')
+    const player = document.querySelector('.tvPlayer')
+    player.innerHTML = ''
+    playerContaniner.style.display = 'none'
+  }
+</script>

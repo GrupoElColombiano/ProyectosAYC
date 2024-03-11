@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import api from "@/services/api";
+
+const { lang } = Astro.params;
+const getlang = getLangFromUrl(Astro.url);
+const t = useTranslations(getlang);
+const data = await api(`home/epaper?lang=${lang}`);
+---
+
+<section class="section epaper-section">
+  <div class="container xlarge">
+    <div class="row align-middle">
+      <div
+        class="col col-mobile-12 col-desktop-5 col-mobile-offset-0 col-desktop-offset-1"
+      >
+        <h2 class="text-mobile-3xl text-desktop-4xl text-bold mb-4">
+          {data?.title}
+        </h2>
+        <a class="button" href={data?.epaper_file} target="_blank"
+          >{t("button.download")}</a
+        >
+      </div>
+      <div class="col order-mobile-first order-desktop-last" style="margin-bottom: 80px;">
+        <a href={data?.printed_magazine} target="_blank">
+          <div class="epaper">
+            <div class="epaper-image">
+              <img
+                loading="lazy"
+                src={data?.image_paper?.url}
+                srcset={data?.image_paper?.srcset}
+                alt="E-paper image"
+              />
+            </div>
+            <div class="epaper-image image-secundary">
+              <img
+                loading="lazy"
+                src={data?.image_paper_secundary?.url}
+                srcset={data?.image_paper_secundary?.srcset}
+                alt="E-paper image"
+              />
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+---
+import http from '@/services/api'
+
+const { lang } = Astro.params
+
+const menu = await http(`menu?lang=${lang}`)
+---
+
+<header class="header">
+  <div class="container xlarge">
+    <div class="row align-middle">
+      <div class="col col-mobile-8 col-desktop-2">
+        <a href="/">
+          <img
+            class="header-logo"
+            src="/logo.svg"
+            width="180"
+            height="147"
+            alt="Logo propiedades"
+          />
+        </a>
+      </div>
+      <div class="col col-10 hidden-mobile">
+        <nav class="menu">
+          <ul class="menu-list">
+            {
+              menu?.map((item) => (
+                <li>
+                  <a class="menu-item" href={`/${lang}${item?.url}`}>
+                    {item?.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+      <!-- <div class="col col-2 hidden-mobile">
+        <div class="language">
+          <a class="language-item" href="/en">EN/</a>
+          <a class="language-item" href="/es">ES</a>
+        </div>
+      </div> -->
+      <div class="col col-4 text-right hidden-desktop">
+        <div class="toogleMenu">
+          <div class="menu-mobile-icon">
+            <img src="/images/icons/menu.svg" width="32" height="32" alt="Icon menu burger" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--  menu full screen mobile -->
+
+<nav role="navigation">
+  <div id="menuToggle" class="menu-mobile">
+    <div class="toogleMenu">
+      <img src="/images/icons/close-menu.svg" alt="Close modal" />
+    </div>
+    <ul class="menu-mobile-list">
+      {
+        menu?.map((item) => (
+          <li>
+            <a class="menu-item" href={item?.url}>
+              {item?.title}
+            </a>
+          </li>
+        ))
+      }
+      <div class="menu-mobile-lang">
+        <a class="menu-mobile-item" href="#">EN/</a>
+        <a class="menu-mobile-item" href="#">ES</a>
+      </div>
+    </ul>
+  </div>
+</nav>

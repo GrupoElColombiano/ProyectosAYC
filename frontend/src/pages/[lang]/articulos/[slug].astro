@@ -1,0 +1,85 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Topbar from '@/components/layout/Topbar.astro'
+import ArticleCard from '@/components/global/ArticleCard.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import http from '@/services/api'
+
+const { lang, slug } = Astro.params
+
+const getlang = getLangFromUrl(Astro.url)
+const t = useTranslations(getlang)
+const article = (await http(`articles/article?slug=${slug}&lang=${lang}`)) || []
+const articleList = await http(`articles?limit=2&lang=${lang}`)
+
+if (article.length === 0) {
+  return Astro.redirect(`/${lang}/404`)
+}
+
+const removeHtml = (text) => {
+  var regex = /(<([^>]+)>)/gi
+  return text.replace(regex, '')
+}
+
+const seoInfo = {
+  title: article?.title,
+  description: removeHtml(article?.intro)?.slice(0, 150),
+  openGraph: {
+    basic: {
+      title: article?.title,
+      type: 'website',
+      image: article?.image?.url
+    },
+    optional: {
+      description: removeHtml(article?.intro)?.slice(0, 150)
+    }
+  }
+}
+---
+
+<Layout seoInfo={seoInfo}>
+  <Topbar title="Inicio > Nota" />
+  <div class="section">
+    <div class="container xlarge">
+      <div class="row">
+        <div class="col col-mobile-12 col-desktop-7">
+          <h4 class="text-mobile-large mb-2 bullet-decoration">
+            {article?.categories[0]}
+          </h4>
+          <h2 class="text-mobile-2xl text-desktop-3xl text-bold mb-4">
+            {article?.title}
+          </h2>
+          <h4 class="text-mobile-lg text-desktop-xl mb-5" set:html={article?.intro} />
+          <div class="mb-4">
+            <img
+              src={article?.image?.url}
+              alt={article?.image?.caption}
+              srcset={article?.image?.srcset}
+              width="100%"
+            />
+            <div class="caption mt-1">
+              {article?.image?.caption}
+            </div>
+          </div>
+          <div class="article-content text-mobile-lg text-color" set:html={article?.content} />
+        </div>
+        <div class="col col-mobile-12 col-desktop-3 col-mobile-offset-0 col-desktop-offset-1">
+          <h3 class="text-mobile-lg text-desktop-xl text-bold mb-4">{t('project.moreArticles')}</h3>
+          {
+            articleList?.map((article) => (
+              <div class="mb-4">
+                <ArticleCard
+                  image={article?.image?.url}
+                  image_srcset={article?.image?.srcset}
+                  subtitle={article?.categories[0]}
+                  title={article?.title}
+                  href={`/${lang}/articulos/${article?.slug}`}
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

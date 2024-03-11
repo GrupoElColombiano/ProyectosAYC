@@ -1,0 +1,19 @@
+.footer {
+  background-color: $primary-color;
+  color: #fff;
+  padding: 5rem;
+  text-align: center;
+  font-size: 0.9rem;
+
+  @media (max-width: 1024px) {
+    padding: 3rem 1rem !important;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

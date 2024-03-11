@@ -1,0 +1,31 @@
+---
+export interface Props {
+  image: string
+  image_srcset: string
+  subtitle: string
+  title: string
+  href: string
+}
+
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const { subtitle, title, href, image, image_srcset } = Astro.props
+---
+
+<div class="property-card">
+  <div class="property-card-container">
+    <div class="property-card-image">
+      <img src={image} srcset={image_srcset} alt={title} />
+    </div>
+    <div class="property-card-content">
+      <h3 class="text-white property-card-subtitle bullet-decoration mb-2">{subtitle}</h3>
+      <h2 class="text-white text-bold property-card-title mb-2">{title}</h2>
+      <a href={href} class="text-white property-card-link">
+        {t('button.learn')}
+        <img src="/images/icons/link-arrow.svg" alt="Image link" />
+      </a>
+    </div>
+  </div>
+</div>

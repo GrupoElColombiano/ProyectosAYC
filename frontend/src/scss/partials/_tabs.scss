@@ -1,0 +1,51 @@
+.tabs {
+  &-navcontainer {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  &-nav {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 1rem;
+    padding-left: 0;
+    list-style: none;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-top: 1px solid $primary-color;
+    width: fit-content;
+
+    &-item {
+      font-size: 16px;
+      position: relative;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      color: #7092b4;
+      transition: all 0.3s ease-in-out;
+      flex: 0 0 auto;
+
+      &:hover {
+        color: $secundary-color;
+      }
+
+      &.active {
+        color: $primary-color;
+        border-color: $secundary-color;
+      }
+    }
+  }
+
+  &-content {
+    opacity: 0;
+    display: none;
+    transition: all 0.2s linear;
+
+    &.active {
+      display: block;
+      opacity: 1;
+    }
+  }
+}

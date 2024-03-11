@@ -1,0 +1,80 @@
+---
+import { getLangFromUrl } from '@/i18n/utils'
+import { SEO } from 'astro-seo'
+import seoDefault from '@/libs/seoDefault'
+import Header from '../components/layout/Header.astro'
+import Footer from '../components/layout/Footer.astro'
+
+const lang = getLangFromUrl(Astro.url)
+const { seoInfo } = Astro.props
+
+const pathname = new URL(Astro.request.url).pathname
+const currentPath = pathname.slice(1)
+
+let title = `${seoInfo?.title} ${seoDefault.siteName}`
+let openGraph = seoInfo?.openGraph || seoDefault.openGraph
+let twitter = seoInfo?.twitter || seoDefault.twitter
+let description = seoInfo?.description || seoDefault.description
+
+if (currentPath === 'es' || currentPath === 'en') {
+  title = `${seoDefault?.title} ${seoDefault.siteName}`
+  openGraph = seoDefault.openGraph
+  twitter = seoDefault.twitter
+  description = seoDefault.description
+}
+
+// import sass
+import '@/scss/main.scss'
+import '@/styles/titan.css'
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <SEO title={title} description={description} openGraph={openGraph} twitter={twitter} />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Google Tag Manager -->
+    <!--script type="text/partytown">
+      ;(function (w, d, s, l, i) {
+        w[l] = w[l] || []
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : ''
+        j.async = true
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+        f.parentNode.insertBefore(j, f)
+      })(window, document, 'script', 'dataLayer', 'GTM-T8BGS9Z')
+    </script-->
+    <!-- End Google Tag Manager -->
+    <!-- nuevo tag manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-T8BGS9Z');</script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T8BGS9Z"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+    <Header />
+    <slot />
+    <Footer />
+    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../libs/global.js"></script>
+  </body>
+</html>

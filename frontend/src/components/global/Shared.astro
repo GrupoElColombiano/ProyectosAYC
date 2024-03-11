@@ -1,0 +1,58 @@
+---
+const currentUrl = Astro.url.href
+---
+
+<div class="shared">
+  <!-- share button -->
+  <div id="shared" class="button share">
+    <img src="/images/icons/share.svg" alt="Share icon menu" />
+    <div class="share-menu">
+      <ul>
+        <li>
+          <a
+            class="share-menu-link"
+            href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
+            target="_blank"
+          >
+            Facebook
+          </a>
+        </li>
+        <li>
+          <a
+            class="share-menu-link"
+            href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
+            target="_blank"
+          >
+            Twitter
+          </a>
+        </li>
+        <li>
+          <a
+            class="share-menu-link"
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`}
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+        </li>
+        <li>
+          <a
+            class="share-menu-link"
+            href={`mailto:?subject=Share by &body=${currentUrl}`}
+            target="_blank"
+          >
+            Email</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- print button -->
+  <div class="button print">
+    <a href="javascript:window.print()">
+      <div class="print-button">
+        <img src="/images/icons/print.svg" alt="Icon print" />
+      </div>
+    </a>
+  </div>
+</div>

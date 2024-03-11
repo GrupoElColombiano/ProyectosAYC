@@ -1,0 +1,63 @@
+.shared {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+
+  .button {
+    font-size: 16px;
+    position: relative;
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+    background: #eaeaea;
+    font-weight: 500;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: #dcdcdc;
+    }
+  }
+
+  .share-menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background: #fff;
+    z-index: 99;
+    list-style: none;
+    margin: 0;
+    padding: 1.0625em 1.25em;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: 0.2s;
+    box-shadow: 0 0.125em 0.125em rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+    display: none;
+    opacity: 0;
+    transition: all 0.3s;
+
+    &.active {
+      opacity: 1;
+      z-index: 99;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    &-link {
+      display: block;
+      margin-bottom: 8px;
+      color: $text-color;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}

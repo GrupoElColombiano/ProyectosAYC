@@ -1,0 +1,148 @@
+.header {
+  border-bottom: 1px solid rgba(5, 5, 5, 0.13);
+  padding: 1rem 0rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  background: $primary-color;
+
+  &-logo {
+    width: 180px;
+  }
+}
+
+.menu {
+  @media (max-width: 1023px) {
+    display: none;
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &-item {
+    font-size: 1rem;
+    margin: 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+      color: $secundary-color;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.language {
+  @media (max-width: 1023px) {
+    display: none;
+  }
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+
+  a {
+    color: #fff;
+  }
+}
+
+// top bar
+.top-bar {
+  background: $secundary-color;
+  padding: 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  background: url('/images/topbar.jpg') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    left: 0;
+  }
+}
+
+// menu mobile
+
+.menu-mobile {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  box-sizing: border-box;
+  padding-top: 100px;
+  background-color: $primary-color;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #fff;
+
+    a {
+      color: #fff;
+      margin: 12px 0;
+      display: block;
+    }
+  }
+
+  &-lang {
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+
+    a {
+      color: #fff;
+      margin: 0 10px;
+    }
+  }
+
+  .toogleMenu {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.menu-mobile-icon {
+  cursor: pointer;
+}
+
+.menu-mobile.active {
+  transform: translate(0%, 0);
+}
