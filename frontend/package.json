@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/node": "^8.2.3",
     "@astrojs/partytown": "^2.0.4",
-    "astro": "^4.4.11",
+    "astro": "^4.5.2",
     "astro-seo": "^0.8.3",
     "cash-dom": "^8.1.5",
     "jquery": "^3.7.1",

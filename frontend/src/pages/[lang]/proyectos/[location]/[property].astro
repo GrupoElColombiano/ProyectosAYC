@@ -18,6 +18,8 @@ if (propertyData.length === 0) {
  return Astro.redirect(`/${lang}/404`)
 }
 
+console.log('*******************************', propertyData)
+
 const removeHtml = (text) => {
   var regex = /(<([^>]+)>)/ig
   return text.replace(regex, "")
@@ -243,7 +245,7 @@ const seoInfo = {
                 </div>
               </div>
             </div>
-            <Form proyect={propertyData?.title} />
+            <Form proyect={propertyData?.title} idFormulario={ propertyData?.id_formulario } />
           </div>
         </div>
       </div>

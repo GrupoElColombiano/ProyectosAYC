@@ -4,6 +4,8 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const getlang = getLangFromUrl(Astro.url)
 const t = useTranslations(getlang)
+
+const { idFormulario } = Astro.props
 ---
 <script>
   window.addEventListener("DOMContentLoaded", (event) => {
@@ -56,7 +58,7 @@ const t = useTranslations(getlang)
 </script>
 
 <form class="form" method="GET" action="https://app.embluemail.com/Online/TriggerUrlExterna.aspx">
-  <input type="hidden" name="key" value="b2facb7b-ada7-4c93-9958-913be224d702" />
+  <input type="hidden" name="key" value={ idFormulario } />
   <input id="1696792" name="1696792" type="hidden" value={proyect} />
 
   <div class="mb-3">
